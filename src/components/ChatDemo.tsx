@@ -105,13 +105,24 @@ export const ChatDemo = ({ prompt }: ChatDemoProps) => {
         )}
 
         {phase === "complete" && (
-          <div className="pb-6 px-4 fade-in">
-            <div className="max-w-3xl mx-auto">
+          <div className="pb-6 px-4 fade-in space-y-3">
+            <div className="max-w-3xl mx-auto flex flex-col sm:flex-row gap-3">
+              <a
+                href={`https://chat.openai.com`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  navigator.clipboard.writeText(prompt);
+                }}
+                className="flex-1 py-3 px-4 rounded-lg bg-secondary border border-border text-foreground text-center font-medium hover:bg-muted transition-colors"
+              >
+                Open ChatGPT (prompt copied) →
+              </a>
               <a
                 href="/"
-                className="block w-full py-3 px-4 rounded-lg bg-primary text-primary-foreground text-center font-medium hover:opacity-90 transition-opacity"
+                className="flex-1 py-3 px-4 rounded-lg bg-primary text-primary-foreground text-center font-medium hover:opacity-90 transition-opacity"
               >
-                Create your own passive-aggressive link →
+                Create your own link
               </a>
             </div>
           </div>
