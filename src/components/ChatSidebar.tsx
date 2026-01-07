@@ -1,4 +1,5 @@
 import { Plus, MessageSquare } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 export const ChatSidebar = () => {
   return (
@@ -19,11 +20,14 @@ export const ChatSidebar = () => {
       </div>
       
       <div className="p-3 border-t border-sidebar-border">
-        <div className="flex items-center gap-3 px-3 py-2 text-sm text-sidebar-foreground">
-          <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-medium">
-            U
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3 px-3 py-2 text-sm text-sidebar-foreground">
+            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-medium">
+              U
+            </div>
+            <span>User</span>
           </div>
-          <span>User</span>
+          <ThemeToggle />
         </div>
       </div>
     </aside>
