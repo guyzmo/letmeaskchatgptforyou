@@ -1,20 +1,12 @@
-# Welcome to your Lovable project
+# Let Me Ask That On Chatgpt For You
+
+This is a small troll project that I generated in 15min using Lovable, because I was curious on how Lovable works
 
 ## Project info
 
-**Live Site**: https://letmeaskchatgpt.github.io/
-
-**Lovable Project**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Live Site**: https://lmatocfy.com
 
 ## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
 
 **Use your preferred IDE**
 
@@ -66,7 +58,7 @@ This project is built with:
 
 ### Automatic Deployment to GitHub Pages
 
-This project is automatically deployed to GitHub Pages at https://letmeaskchatgpt.github.io/ whenever changes are pushed to the `main` branch.
+This project is automatically deployed to GitHub Pages at https://lmatocfy.com/ whenever changes are pushed to the `main` branch.
 
 The deployment workflow:
 1. Automatically triggers on push to `main`
@@ -77,26 +69,3 @@ You can also trigger a manual deployment:
 1. Go to the "Actions" tab in GitHub
 2. Select "Deploy to GitHub Pages" workflow
 3. Click "Run workflow" and select the `main` branch
-
-### Initial Setup (Repository Owner)
-
-After merging this PR, the repository owner needs to configure GitHub Pages:
-1. Go to repository Settings → Pages
-2. Under "Build and deployment", set Source to **GitHub Actions**
-
-### Deploy via Lovable
-
-Alternatively, you can open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I use a custom domain?
-
-Yes, you can connect a custom domain to your GitHub Pages site!
-
-To connect a custom domain:
-1. Go to repository Settings → Pages
-2. Under "Custom domain", enter your domain name
-3. Configure your DNS settings as instructed
-
-Read more in the official documentation:
-- [GitHub Pages: Configuring a custom domain](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)
-- [Lovable: Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
