@@ -35,7 +35,7 @@ export const LinkGenerator = () => {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/20 mb-4">
           <Sparkles className="w-8 h-8 text-primary" />
         </div>
-        <h1 className="text-3xl font-bold mb-2">Let Me Ask ChatGPT For You</h1>
+        <h1 className="text-3xl font-bold mb-2">Let Me Ask That On ChatGPT For You</h1>
         <p className="text-muted-foreground">
           For when your friends need a gentle reminder that AI exists.
         </p>
