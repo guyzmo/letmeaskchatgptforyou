@@ -108,15 +108,12 @@ export const ChatDemo = ({ prompt }: ChatDemoProps) => {
           <div className="pb-6 px-4 fade-in space-y-3">
             <div className="max-w-3xl mx-auto flex flex-col sm:flex-row gap-3">
               <a
-                href={`https://chat.openai.com`}
+                href={`https://chat.openai.com?prompt={prompt}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
-                  navigator.clipboard.writeText(prompt);
-                }}
                 className="flex-1 py-3 px-4 rounded-lg bg-secondary border border-border text-foreground text-center font-medium hover:bg-muted transition-colors"
               >
-                Open ChatGPT (prompt copied) →
+                Open ChatGPT →
               </a>
               <a
                 href="/"
