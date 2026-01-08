@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import cursorImage from "@/assets/macos-cursor.png";
 
 interface AnimatedCursorProps {
   targetRef: React.RefObject<HTMLElement>;
@@ -72,27 +73,16 @@ export const AnimatedCursor = ({ targetRef, onComplete, delay = 0, startPosition
       style={{
         left: position.x,
         top: position.y,
-        transform: "translate(-2px, -2px)"
       }}
     >
-      {/* macOS Cursor SVG */}
-      <svg
-        width="24"
-        height="28"
-        viewBox="0 0 24 28"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-md"
-        style={{ filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.3))" }}
-      >
-        <path
-          d="M2.5 0.5L2.5 22.5L7.5 17.5L11.5 26.5L15 25L11 16H19L2.5 0.5Z"
-          fill="white"
-          stroke="black"
-          strokeWidth="1"
-          strokeLinejoin="round"
-        />
-      </svg>
+      <img
+        src={cursorImage}
+        alt=""
+        className="w-6 h-auto drop-shadow-lg"
+        style={{ 
+          filter: "drop-shadow(1px 1px 2px rgba(0,0,0,0.4))",
+        }}
+      />
       
       {/* Click ripple effect */}
       {isClicking && (
