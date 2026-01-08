@@ -14,6 +14,7 @@ export const ChatDemo = ({ prompt }: ChatDemoProps) => {
   const [phase, setPhase] = useState<Phase>("idle");
   const [typedText, setTypedText] = useState("");
   const [streamedResponse, setStreamedResponse] = useState("");
+  const [lastCursorPosition, setLastCursorPosition] = useState<{ x: number; y: number } | null>(null);
   const sendButtonRef = useRef<HTMLButtonElement>(null);
   const textareaRef = useRef<HTMLDivElement>(null);
 
@@ -82,6 +83,14 @@ export const ChatDemo = ({ prompt }: ChatDemoProps) => {
   const showSendCursor = phase === "clickingSend";
 
   const handleInputCursorComplete = () => {
+    // Save the textarea position for the next cursor to start from
+    if (textareaRef.current) {
+      const rect = textareaRef.current.getBoundingClientRect();
+      setLastCursorPosition({
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2
+      });
+    }
     setPhase("typing");
   };
 
@@ -135,6 +144,7 @@ export const ChatDemo = ({ prompt }: ChatDemoProps) => {
             targetRef={sendButtonRef}
             onComplete={handleSendCursorComplete}
             delay={100}
+            startPosition={lastCursorPosition}
           />
         )}
 
