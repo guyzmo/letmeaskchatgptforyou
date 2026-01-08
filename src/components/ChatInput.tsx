@@ -6,13 +6,15 @@ interface ChatInputProps {
   value: string;
   disabled?: boolean;
   sendButtonRef?: RefObject<HTMLButtonElement>;
+  textareaRef?: RefObject<HTMLDivElement>;
 }
 
-export const ChatInput = ({ value, disabled, sendButtonRef }: ChatInputProps) => {
+export const ChatInput = ({ value, disabled, sendButtonRef, textareaRef }: ChatInputProps) => {
   return (
     <div className="max-w-3xl mx-auto px-4 md:px-8 pb-6">
       <div className="relative">
         <div
+          ref={textareaRef}
           className={cn(
             "w-full min-h-[52px] max-h-48 px-4 py-3 pr-12 rounded-2xl bg-secondary border border-border",
             "text-foreground resize-none overflow-hidden",
