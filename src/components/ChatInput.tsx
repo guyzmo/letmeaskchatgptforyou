@@ -1,12 +1,14 @@
 import { ArrowUp } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { RefObject } from "react";
 
 interface ChatInputProps {
   value: string;
   disabled?: boolean;
+  sendButtonRef?: RefObject<HTMLButtonElement>;
 }
 
-export const ChatInput = ({ value, disabled }: ChatInputProps) => {
+export const ChatInput = ({ value, disabled, sendButtonRef }: ChatInputProps) => {
   return (
     <div className="max-w-3xl mx-auto px-4 md:px-8 pb-6">
       <div className="relative">
@@ -20,6 +22,7 @@ export const ChatInput = ({ value, disabled }: ChatInputProps) => {
           <span className={value ? "" : "typing-cursor"}>{value}</span>
         </div>
         <button
+          ref={sendButtonRef}
           className={cn(
             "absolute right-2 bottom-2 w-8 h-8 rounded-lg flex items-center justify-center transition-colors",
             value ? "bg-foreground text-background" : "bg-muted text-muted-foreground"
