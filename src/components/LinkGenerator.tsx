@@ -41,7 +41,7 @@ export const LinkGenerator = () => {
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-4 max-w-xl mx-auto">
         <div>
           <label className="text-sm font-medium mb-2 block">
             Enter the question they should've asked
@@ -59,7 +59,14 @@ export const LinkGenerator = () => {
             <label className="text-sm font-medium mb-2 block text-muted-foreground">
               Your passive-aggressive link
             </label>
-            <p className="text-sm break-all text-primary">{generatedLink}</p>
+            <a 
+              href={generatedLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm break-all text-primary hover:underline"
+            >
+              {generatedLink}
+            </a>
           </div>
         )}
 
