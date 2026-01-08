@@ -8,23 +8,24 @@ interface ChatDemoProps {
   prompt: string;
 }
 
-type Phase = "idle" | "typing" | "clicking" | "sent" | "streaming" | "complete";
+type Phase = "idle" | "movingToInput" | "typing" | "clickingSend" | "sent" | "streaming" | "complete";
 
 export const ChatDemo = ({ prompt }: ChatDemoProps) => {
   const [phase, setPhase] = useState<Phase>("idle");
   const [typedText, setTypedText] = useState("");
   const [streamedResponse, setStreamedResponse] = useState("");
   const sendButtonRef = useRef<HTMLButtonElement>(null);
+  const textareaRef = useRef<HTMLDivElement>(null);
 
   const responseText = `Was that so hard? 🙄\n\nNext time, try asking ChatGPT yourself! You can find it at chat.openai.com — it's free and quite good at answering questions.\n\nThis message was brought to you by someone who believes in your ability to use the internet. 💪`;
 
-  // Typing animation for the prompt
+  // Start by moving cursor to input
   useEffect(() => {
     if (phase !== "idle") return;
     
     const startDelay = setTimeout(() => {
-      setPhase("typing");
-    }, 800);
+      setPhase("movingToInput");
+    }, 500);
 
     return () => clearTimeout(startDelay);
   }, [phase]);
@@ -39,7 +40,7 @@ export const ChatDemo = ({ prompt }: ChatDemoProps) => {
         index++;
       } else {
         clearInterval(interval);
-        setTimeout(() => setPhase("clicking"), 300);
+        setTimeout(() => setPhase("clickingSend"), 300);
       }
     }, 50 + Math.random() * 30);
 
@@ -77,9 +78,14 @@ export const ChatDemo = ({ prompt }: ChatDemoProps) => {
 
   const showUserMessage = phase === "sent" || phase === "streaming" || phase === "complete";
   const showAssistantMessage = phase === "streaming" || phase === "complete";
-  const showCursor = phase === "clicking";
+  const showInputCursor = phase === "movingToInput";
+  const showSendCursor = phase === "clickingSend";
 
-  const handleCursorComplete = () => {
+  const handleInputCursorComplete = () => {
+    setPhase("typing");
+  };
+
+  const handleSendCursorComplete = () => {
     setPhase("sent");
   };
 
@@ -107,14 +113,27 @@ export const ChatDemo = ({ prompt }: ChatDemoProps) => {
 
         {(!showUserMessage) && (
           <div className="pb-4">
-            <ChatInput value={typedText} disabled sendButtonRef={sendButtonRef} />
+            <ChatInput 
+              value={typedText} 
+              disabled 
+              sendButtonRef={sendButtonRef} 
+              textareaRef={textareaRef}
+            />
           </div>
         )}
 
-        {showCursor && (
+        {showInputCursor && (
+          <AnimatedCursor
+            targetRef={textareaRef}
+            onComplete={handleInputCursorComplete}
+            delay={100}
+          />
+        )}
+
+        {showSendCursor && (
           <AnimatedCursor
             targetRef={sendButtonRef}
-            onComplete={handleCursorComplete}
+            onComplete={handleSendCursorComplete}
             delay={100}
           />
         )}

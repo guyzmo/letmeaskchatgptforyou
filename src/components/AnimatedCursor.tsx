@@ -40,6 +40,10 @@ export const AnimatedCursor = ({ targetRef, onComplete, delay = 0 }: AnimatedCur
       setIsClicking(true);
     }, 1000);
 
+    const releaseTimer = setTimeout(() => {
+      setIsClicking(false);
+    }, 1150);
+
     const completeTimer = setTimeout(() => {
       onComplete();
     }, 1200);
@@ -47,6 +51,7 @@ export const AnimatedCursor = ({ targetRef, onComplete, delay = 0 }: AnimatedCur
     return () => {
       clearTimeout(moveTimer);
       clearTimeout(clickTimer);
+      clearTimeout(releaseTimer);
       clearTimeout(completeTimer);
     };
   }, [isVisible, targetRef, onComplete]);
@@ -65,27 +70,29 @@ export const AnimatedCursor = ({ targetRef, onComplete, delay = 0 }: AnimatedCur
         transform: "translate(-2px, -2px)"
       }}
     >
-      {/* Cursor SVG */}
+      {/* macOS Cursor SVG */}
       <svg
         width="24"
-        height="24"
-        viewBox="0 0 24 24"
+        height="28"
+        viewBox="0 0 24 28"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-lg"
+        className="drop-shadow-md"
+        style={{ filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.3))" }}
       >
         <path
-          d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.48 0 .72-.58.38-.92L6.35 2.85a.5.5 0 0 0-.85.36Z"
+          d="M2.5 0.5L2.5 22.5L7.5 17.5L11.5 26.5L15 25L11 16H19L2.5 0.5Z"
           fill="white"
           stroke="black"
-          strokeWidth="1.5"
+          strokeWidth="1"
+          strokeLinejoin="round"
         />
       </svg>
       
       {/* Click ripple effect */}
       {isClicking && (
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="w-8 h-8 rounded-full bg-primary/30 animate-ping" />
+        <div className="absolute top-2 left-1">
+          <div className="w-6 h-6 rounded-full bg-foreground/20 animate-ping" />
         </div>
       )}
     </div>
