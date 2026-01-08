@@ -1,18 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChatSidebar } from "./ChatSidebar";
 import { ChatMessage } from "./ChatMessage";
 import { ChatInput } from "./ChatInput";
+import { AnimatedCursor } from "./AnimatedCursor";
 
 interface ChatDemoProps {
   prompt: string;
 }
 
-type Phase = "idle" | "typing" | "sent" | "streaming" | "complete";
+type Phase = "idle" | "typing" | "clicking" | "sent" | "streaming" | "complete";
 
 export const ChatDemo = ({ prompt }: ChatDemoProps) => {
   const [phase, setPhase] = useState<Phase>("idle");
   const [typedText, setTypedText] = useState("");
   const [streamedResponse, setStreamedResponse] = useState("");
+  const sendButtonRef = useRef<HTMLButtonElement>(null);
 
   const responseText = `Was that so hard? 🙄\n\nNext time, try asking ChatGPT yourself! You can find it at chat.openai.com — it's free and quite good at answering questions.\n\nThis message was brought to you by someone who believes in your ability to use the internet. 💪`;
 
@@ -37,7 +39,7 @@ export const ChatDemo = ({ prompt }: ChatDemoProps) => {
         index++;
       } else {
         clearInterval(interval);
-        setTimeout(() => setPhase("sent"), 500);
+        setTimeout(() => setPhase("clicking"), 300);
       }
     }, 50 + Math.random() * 30);
 
@@ -75,6 +77,11 @@ export const ChatDemo = ({ prompt }: ChatDemoProps) => {
 
   const showUserMessage = phase === "sent" || phase === "streaming" || phase === "complete";
   const showAssistantMessage = phase === "streaming" || phase === "complete";
+  const showCursor = phase === "clicking";
+
+  const handleCursorComplete = () => {
+    setPhase("sent");
+  };
 
   return (
     <div className="flex h-screen bg-background">
@@ -98,10 +105,18 @@ export const ChatDemo = ({ prompt }: ChatDemoProps) => {
           )}
         </div>
 
-        {!showUserMessage && (
+        {(!showUserMessage) && (
           <div className="pb-4">
-            <ChatInput value={typedText} disabled />
+            <ChatInput value={typedText} disabled sendButtonRef={sendButtonRef} />
           </div>
+        )}
+
+        {showCursor && (
+          <AnimatedCursor
+            targetRef={sendButtonRef}
+            onComplete={handleCursorComplete}
+            delay={100}
+          />
         )}
 
         {phase === "complete" && (
